@@ -5,11 +5,17 @@ class ParticipationStatsCard extends StatelessWidget {
   const ParticipationStatsCard({
     required this.directCount,
     required this.swlCount,
+    this.directValueKey,
+    this.swlValueKey,
+    this.totalValueKey,
     super.key,
   });
 
   final int directCount;
   final int swlCount;
+  final Key? directValueKey;
+  final Key? swlValueKey;
+  final Key? totalValueKey;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +29,7 @@ class ParticipationStatsCard extends StatelessWidget {
           children: [
             Expanded(
               child: _StatTile(
-                valueKey: const Key('home-direct-count'),
+                valueKey: directValueKey,
                 label: 'Direkt',
                 value: directCount,
                 icon: Icons.mic_rounded,
@@ -31,7 +37,7 @@ class ParticipationStatsCard extends StatelessWidget {
             ),
             Expanded(
               child: _StatTile(
-                valueKey: const Key('home-swl-count'),
+                valueKey: swlValueKey,
                 label: 'SWL',
                 value: swlCount,
                 icon: Icons.headphones_rounded,
@@ -39,7 +45,7 @@ class ParticipationStatsCard extends StatelessWidget {
             ),
             Expanded(
               child: _StatTile(
-                valueKey: const Key('home-total-count'),
+                valueKey: totalValueKey,
                 label: 'Toplam',
                 value: directCount + swlCount,
                 icon: Icons.groups_rounded,
@@ -60,7 +66,7 @@ class _StatTile extends StatelessWidget {
     required this.icon,
   });
 
-  final Key valueKey;
+  final Key? valueKey;
   final String label;
   final int value;
   final IconData icon;
