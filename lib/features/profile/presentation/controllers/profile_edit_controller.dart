@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qo100_tr/app/providers/repository_providers.dart';
 import 'package:qo100_tr/features/profile/domain/entities/user_profile.dart';
+import 'package:qo100_tr/features/profile/domain/services/profile_input_validator.dart';
 import 'package:qo100_tr/features/profile/presentation/models/profile_edit_state.dart';
 
 class ProfileEditController extends Notifier<ProfileEditState> {
@@ -19,20 +20,17 @@ class ProfileEditController extends Notifier<ProfileEditState> {
     required String antenna,
     required String gear,
   }) async {
-    final values = <String, String>{
-      'callsign': callsign.trim(),
-      'name': name.trim(),
-      'city': city.trim(),
-      'locator': locator.trim(),
-    };
-    final errors = <String, String>{};
-    for (final entry in values.entries) {
-      if (entry.value.isEmpty) errors[entry.key] = 'Bu alan zorunludur.';
-    }
-    if (errors.isNotEmpty) {
-      state = ProfileEditState.validationFailure(errors);
+    final validation = ProfileInputValidator.validate(
+      callsign: callsign,
+      name: name,
+      city: city,
+      locator: locator,
+    );
+    if (!validation.isValid) {
+      state = ProfileEditState.validationFailure(validation.errors);
       return false;
     }
+    final values = validation.values;
 
     state = const ProfileEditState.saving();
     final updated = UserProfile(
