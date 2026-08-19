@@ -4,6 +4,7 @@ import 'package:qo100_tr/app/providers/app_config_provider.dart';
 import 'package:qo100_tr/app/theme/app_colors.dart';
 import 'package:qo100_tr/app/theme/app_radius.dart';
 import 'package:qo100_tr/app/theme/app_spacing.dart';
+import 'package:qo100_tr/core/providers/external_url_launcher_provider.dart';
 import 'package:qo100_tr/features/live/presentation/models/live_view_state.dart';
 import 'package:qo100_tr/features/live/presentation/providers/live_providers.dart';
 
