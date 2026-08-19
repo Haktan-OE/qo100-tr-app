@@ -1,17 +1,67 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qo100_tr/app/shell/app_shell.dart';
+import 'package:qo100_tr/features/home/presentation/home_page.dart';
+import 'package:qo100_tr/features/live/presentation/live_page.dart';
+import 'package:qo100_tr/features/news/presentation/news_page.dart';
+import 'package:qo100_tr/features/participation/presentation/participation_page.dart';
+import 'package:qo100_tr/features/profile/presentation/profile_page.dart';
 
-final GoRouter appRouter = GoRouter(
+abstract final class AppRoutes {
+  static const home = '/app/home';
+  static const live = '/app/live';
+  static const participation = '/app/participation';
+  static const news = '/app/news';
+  static const profile = '/app/profile';
+}
+
+GoRouter createAppRouter() => GoRouter(
+  initialLocation: AppRoutes.home,
   routes: [
-    GoRoute(path: '/', builder: (context, state) => const _FoundationPage()),
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) =>
+          AppShell(navigationShell: navigationShell),
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.home,
+              builder: (context, state) => const HomePage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.live,
+              builder: (context, state) => const LivePage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.participation,
+              builder: (context, state) => const ParticipationPage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.news,
+              builder: (context, state) => const NewsPage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.profile,
+              builder: (context, state) => const ProfilePage(),
+            ),
+          ],
+        ),
+      ],
+    ),
   ],
 );
-
-class _FoundationPage extends StatelessWidget {
-  const _FoundationPage();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('QO-100 TR')));
-  }
-}
