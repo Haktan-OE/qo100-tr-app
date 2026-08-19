@@ -4,4 +4,6 @@ abstract interface class UserProfileRepository {
   Future<UserProfile?> getCurrentUserProfile();
 
   Stream<UserProfile?> watchCurrentUserProfile();
+
+  Future<UserProfile> updateCurrentUserProfile(UserProfile profile);
 }
