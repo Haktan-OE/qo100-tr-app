@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qo100_tr/app/theme/app_spacing.dart';
-import 'package:qo100_tr/features/home/presentation/formatters/home_date_formatter.dart';
+import 'package:qo100_tr/core/formatters/app_date_formatter.dart';
 import 'package:qo100_tr/features/news/domain/entities/news_item.dart';
 
 class NewsPreviewCard extends StatelessWidget {
@@ -47,7 +47,7 @@ class NewsPreviewCard extends StatelessWidget {
                   const SizedBox(height: AppSpacing.sm),
                   Text(
                     '${item.source} • '
-                    '${HomeDateFormatter.newsDate(item.publishedAt)}',
+                    '${AppDateFormatter.date(item.publishedAt)}',
                     style: textTheme.labelMedium?.copyWith(
                       color: colors.primary,
                     ),

@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qo100_tr/app/router/app_router.dart';
 import 'package:qo100_tr/app/theme/app_spacing.dart';
+import 'package:qo100_tr/core/widgets/participation_stats_card.dart';
 import 'package:qo100_tr/features/home/presentation/providers/home_providers.dart';
 import 'package:qo100_tr/features/home/presentation/widgets/announcement_card.dart';
 import 'package:qo100_tr/features/home/presentation/widgets/home_action_card.dart';
 import 'package:qo100_tr/features/home/presentation/widgets/home_state_card.dart';
 import 'package:qo100_tr/features/home/presentation/widgets/news_preview_card.dart';
-import 'package:qo100_tr/features/home/presentation/widgets/participation_stats_card.dart';
 import 'package:qo100_tr/features/home/presentation/widgets/section_header.dart';
 import 'package:qo100_tr/features/home/presentation/widgets/session_hero_card.dart';
 import 'package:qo100_tr/features/news/domain/entities/news_item.dart';
@@ -210,7 +210,13 @@ class _ParticipationSummary extends StatelessWidget {
         .where((checkIn) => checkIn.participationType == ParticipationType.swl)
         .length;
 
-    return ParticipationStatsCard(directCount: directCount, swlCount: swlCount);
+    return ParticipationStatsCard(
+      directCount: directCount,
+      swlCount: swlCount,
+      directValueKey: const Key('home-direct-count'),
+      swlValueKey: const Key('home-swl-count'),
+      totalValueKey: const Key('home-total-count'),
+    );
   }
 }
 

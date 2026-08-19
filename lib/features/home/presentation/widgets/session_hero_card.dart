@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qo100_tr/app/theme/app_colors.dart';
 import 'package:qo100_tr/app/theme/app_radius.dart';
 import 'package:qo100_tr/app/theme/app_spacing.dart';
-import 'package:qo100_tr/features/home/presentation/formatters/home_date_formatter.dart';
+import 'package:qo100_tr/core/formatters/app_date_formatter.dart';
 import 'package:qo100_tr/features/participation/domain/entities/community_session.dart';
 
 class SessionHeroCard extends StatelessWidget {
@@ -78,7 +78,7 @@ class SessionHeroCard extends StatelessWidget {
                       const SizedBox(width: AppSpacing.xs),
                       Expanded(
                         child: Text(
-                          HomeDateFormatter.sessionDateTime(session.startAt),
+                          AppDateFormatter.dateTimeUtc(session.startAt),
                           style: textTheme.bodyMedium?.copyWith(
                             color: colors.onSurfaceVariant,
                           ),
