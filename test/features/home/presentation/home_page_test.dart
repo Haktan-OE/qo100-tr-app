@@ -12,6 +12,7 @@ import 'package:qo100_tr/features/home/presentation/widgets/home_action_card.dar
 import 'package:qo100_tr/features/home/presentation/widgets/session_hero_card.dart';
 import 'package:qo100_tr/features/live/presentation/live_page.dart';
 import 'package:qo100_tr/features/news/data/fixtures/news_fixtures.dart';
+import 'package:qo100_tr/features/news/presentation/news_detail_page.dart';
 import 'package:qo100_tr/features/news/presentation/news_page.dart';
 import 'package:qo100_tr/features/participation/domain/entities/community_session.dart';
 import 'package:qo100_tr/features/participation/domain/repositories/session_repository.dart';
@@ -89,6 +90,19 @@ void main() {
 
     expect(find.byKey(NewsPage.pageKey), findsOneWidget);
     expect(router.state.uri.path, AppRoutes.news);
+  });
+
+  testWidgets('tapping a news preview opens its detail route', (tester) async {
+    final router = await _pumpApp(tester);
+    addTearDown(router.dispose);
+    final item = NewsFixtures.items.first;
+
+    await _scrollTo(tester, find.byKey(Key('home-news-${item.id}')));
+    await tester.tap(find.byKey(Key('home-news-${item.id}')));
+    await tester.pumpAndSettle();
+
+    expect(router.state.uri.path, AppRoutes.newsDetail(item.id));
+    expect(find.byKey(NewsDetailPage.pageKey), findsOneWidget);
   });
 
   testWidgets('shows the session loading state', (tester) async {

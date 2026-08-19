@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:qo100_tr/app/shell/app_shell.dart';
 import 'package:qo100_tr/features/home/presentation/home_page.dart';
 import 'package:qo100_tr/features/live/presentation/live_page.dart';
+import 'package:qo100_tr/features/news/presentation/news_detail_page.dart';
 import 'package:qo100_tr/features/news/presentation/news_page.dart';
 import 'package:qo100_tr/features/participation/presentation/participation_page.dart';
 import 'package:qo100_tr/features/participation/presentation/week_detail_placeholder_page.dart';
@@ -13,6 +14,7 @@ abstract final class AppRoutes {
   static const participation = '/app/participation';
   static const participationWeekDetail = '/app/participation/week-detail';
   static const news = '/app/news';
+  static String newsDetail(String id) => '$news/${Uri.encodeComponent(id)}';
   static const profile = '/app/profile';
 }
 
@@ -59,6 +61,13 @@ GoRouter createAppRouter() => GoRouter(
             GoRoute(
               path: AppRoutes.news,
               builder: (context, state) => const NewsPage(),
+              routes: [
+                GoRoute(
+                  path: ':id',
+                  builder: (context, state) =>
+                      NewsDetailPage(newsId: state.pathParameters['id']!),
+                ),
+              ],
             ),
           ],
         ),

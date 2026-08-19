@@ -94,7 +94,10 @@ class HomePage extends ConsumerWidget {
                 actionLabel: 'Tekrar Dene',
                 onAction: () => ref.invalidate(recentNewsProvider),
               ),
-              data: (items) => _NewsSection(items: items),
+              data: (items) => _NewsSection(
+                items: items,
+                onOpen: (item) => context.go(AppRoutes.newsDetail(item.id)),
+              ),
             ),
           ],
         ),
@@ -221,9 +224,10 @@ class _ParticipationSummary extends StatelessWidget {
 }
 
 class _NewsSection extends StatelessWidget {
-  const _NewsSection({required this.items});
+  const _NewsSection({required this.items, required this.onOpen});
 
   final List<NewsItem> items;
+  final ValueChanged<NewsItem> onOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -239,7 +243,10 @@ class _NewsSection extends StatelessWidget {
     return Column(
       children: [
         for (var index = 0; index < items.length; index++) ...[
-          NewsPreviewCard(item: items[index]),
+          NewsPreviewCard(
+            item: items[index],
+            onTap: () => onOpen(items[index]),
+          ),
           if (index != items.length - 1) const SizedBox(height: AppSpacing.sm),
         ],
       ],
