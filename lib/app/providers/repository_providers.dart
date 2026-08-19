@@ -22,6 +22,8 @@ final newsRepositoryProvider = Provider<NewsRepository>(
   (ref) => FixtureNewsRepository(),
 );
 
-final userProfileRepositoryProvider = Provider<UserProfileRepository>(
-  (ref) => FixtureUserProfileRepository(),
-);
+final userProfileRepositoryProvider = Provider<UserProfileRepository>((ref) {
+  final repository = FixtureUserProfileRepository();
+  ref.onDispose(repository.dispose);
+  return repository;
+});

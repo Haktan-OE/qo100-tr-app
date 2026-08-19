@@ -7,6 +7,7 @@ import 'package:qo100_tr/features/news/presentation/news_page.dart';
 import 'package:qo100_tr/features/participation/presentation/participation_page.dart';
 import 'package:qo100_tr/features/participation/presentation/week_detail_placeholder_page.dart';
 import 'package:qo100_tr/features/profile/presentation/profile_page.dart';
+import 'package:qo100_tr/features/profile/presentation/profile_edit_page.dart';
 
 abstract final class AppRoutes {
   static const home = '/app/home';
@@ -16,6 +17,7 @@ abstract final class AppRoutes {
   static const news = '/app/news';
   static String newsDetail(String id) => '$news/${Uri.encodeComponent(id)}';
   static const profile = '/app/profile';
+  static const profileEdit = '/app/profile/edit';
 }
 
 GoRouter createAppRouter() => GoRouter(
@@ -76,6 +78,12 @@ GoRouter createAppRouter() => GoRouter(
             GoRoute(
               path: AppRoutes.profile,
               builder: (context, state) => const ProfilePage(),
+              routes: [
+                GoRoute(
+                  path: 'edit',
+                  builder: (context, state) => const ProfileEditPage(),
+                ),
+              ],
             ),
           ],
         ),

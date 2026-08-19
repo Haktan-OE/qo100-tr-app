@@ -20,4 +20,22 @@ class UserProfile {
   final String? antenna;
   final String? gear;
   final UserRole role;
+
+  UserProfile copyWith({
+    String? callsign,
+    String? name,
+    String? city,
+    String? locator,
+    String? antenna,
+    String? gear,
+  }) => UserProfile(
+    id: id,
+    callsign: callsign ?? this.callsign,
+    name: name ?? this.name,
+    city: city ?? this.city,
+    locator: locator ?? this.locator,
+    antenna: antenna ?? this.antenna,
+    gear: gear ?? this.gear,
+    role: role,
+  );
 }
