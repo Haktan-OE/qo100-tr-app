@@ -8,6 +8,8 @@ class FixtureUserProfileRepository implements UserProfileRepository {
   FixtureUserProfileRepository({UserProfile? currentUser})
     : _currentUser = currentUser ?? ProfileFixtures.currentUser;
 
+  FixtureUserProfileRepository.empty() : _currentUser = null;
+
   UserProfile? _currentUser;
   final StreamController<UserProfile?> _controller =
       StreamController<UserProfile?>.broadcast();

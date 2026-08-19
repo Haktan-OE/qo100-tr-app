@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:qo100_tr/features/auth/data/fixtures/fixture_auth_repository.dart';
+import 'package:qo100_tr/features/auth/domain/repositories/auth_repository.dart';
 import 'package:qo100_tr/features/news/data/fixtures/fixture_news_repository.dart';
 import 'package:qo100_tr/features/news/domain/repositories/news_repository.dart';
 import 'package:qo100_tr/features/participation/data/fixtures/fixture_check_in_repository.dart';
@@ -24,6 +26,11 @@ final newsRepositoryProvider = Provider<NewsRepository>(
 
 final userProfileRepositoryProvider = Provider<UserProfileRepository>((ref) {
   final repository = FixtureUserProfileRepository();
+  ref.onDispose(repository.dispose);
+  return repository;
+});
+final authRepositoryProvider = Provider<AuthRepository>((ref) {
+  final repository = FixtureAuthRepository();
   ref.onDispose(repository.dispose);
   return repository;
 });
