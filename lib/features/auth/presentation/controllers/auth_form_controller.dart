@@ -73,6 +73,13 @@ class AuthFormController extends Notifier<AuthFormState> {
           message: 'Bu e-posta ile bir hesap zaten var.',
         );
       }
+    } on WeakPasswordException {
+      if (ref.mounted) {
+        state = const AuthFormState(
+          AuthFormStatus.error,
+          message: 'Şifre çok zayıf.',
+        );
+      }
     } on Object {
       if (ref.mounted) {
         state = const AuthFormState(

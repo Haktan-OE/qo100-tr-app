@@ -17,4 +17,17 @@ void main() {
       expect(AppConfig.parseLiveUrl('not a url'), isNull);
     });
   });
+
+  group('AppConfig.parseBackend', () {
+    test('selects Firebase only for an explicit firebase value', () {
+      expect(AppConfig.parseBackend('firebase'), AppBackend.firebase);
+      expect(AppConfig.parseBackend(' FIREBASE '), AppBackend.firebase);
+    });
+
+    test('keeps fixture as the safe default', () {
+      expect(AppConfig.parseBackend(''), AppBackend.fixture);
+      expect(AppConfig.parseBackend('fixture'), AppBackend.fixture);
+      expect(AppConfig.parseBackend('unknown'), AppBackend.fixture);
+    });
+  });
 }
