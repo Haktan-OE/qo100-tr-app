@@ -77,7 +77,7 @@ class AuthFormController extends Notifier<AuthFormState> {
       if (ref.mounted) {
         state = const AuthFormState(
           AuthFormStatus.error,
-          message: 'Şifre Firebase tarafından çok zayıf bulundu.',
+          message: 'Şifre çok zayıf.',
         );
       }
     } on Object {
